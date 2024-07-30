@@ -6,7 +6,7 @@ from discord.ext import commands, tasks
 
 
 load_dotenv()
-TOKEN = os.getenv(DISCORD_TOKEN)
+TOKEN=os.getenv(DISCORD_TOKEN)
 
 
 intents = discord.Intents.default()
