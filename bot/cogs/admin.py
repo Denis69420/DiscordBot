@@ -10,5 +10,5 @@ class Admin(commands.Cog):
         await member.kick(reason=reason)
         await ctx.send(f"{member} has been kicked.")
 
-def setup(bot):
-    bot.add_cog(Admin(bot))
+async def setup(bot):
+    await bot.add_cog(Admin(bot))
