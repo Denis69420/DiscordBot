@@ -18,10 +18,6 @@ if __name__ == "__main__":
         else:
             logger.info(f"DISCORD_TOKEN is set: {TOKEN[:4]}...")  # Print first 4 characters for security
 
-            # Load cogs individually
-            
-            bot.load_cog('bot.cogs.admin')
-
             # Start the bot
             bot.run(TOKEN)
     except Exception as e:

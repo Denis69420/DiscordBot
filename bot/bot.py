@@ -8,19 +8,14 @@ logger = logging.getLogger(__name__)
 class MyBot(commands.Bot):
     def __init__(self, command_prefix, intents):
         super().__init__(command_prefix=command_prefix, intents=intents)
-        self.initial_extensions = ["bot.cogs.general", "bot.cogs.admin"]
 
     async def on_ready(self):
-        await bot.load_extension('general')
         logger.info(f'Logged in as {self.user}')
+        print(f'Logged in as {self.user}')  # Print statement for debugging
 
-    def load_cog(self, cog_name):
-        try:
-            self.load_extension(cog_name)
-            logger.info(f"Loaded cog: {cog_name}")
-        except Exception as e:
-            logger.error(f"Failed to load cog {cog_name}: {e}")
-            raise e  # Reraise the exception to see the full traceback
+        # Load extensions (cogs)
+        await self.load_extension('bot.cogs.general')
+        await self.load_extension('bot.cogs.admin')
 
 intents = discord.Intents.default()
 intents.messages = True
