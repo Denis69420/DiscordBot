@@ -29,4 +29,4 @@ intents.members = True
 intents.voice_states = True
 
 bot = MyBot(command_prefix='/', intents=intents)
-bot.load_cogs()
+bot.load_extension('cogs.general')
