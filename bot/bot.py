@@ -18,6 +18,8 @@ class MyBot(commands.Bot):
             logger.info(f"Loaded cog: {cog_name}")
         except Exception as e:
             logger.error(f"Failed to load cog {cog_name}: {e}")
+            raise e  # Reraise the exception to see the full traceback
+
 
 intents = discord.Intents.default()
 intents.messages = True
