@@ -13,6 +13,7 @@ class MyBot(commands.Bot):
         # This is a new method recommended by discord.py for async setup
         await self.load_extension('bot.cogs.general')
         await self.load_extension('bot.cogs.admin')
+        await self.load_extension('bot.cogs.help')
 
     async def on_ready(self):
         logger.info(f'Logged in as {self.user}')
