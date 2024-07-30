@@ -20,10 +20,18 @@ intents.voice_states = True
 bot = commands.Bot(command_prefix='/', intents=intents)
 
 
+def get_db_connection():
+    return mysql.connector.connect(
+        host=os.getenv('DB_HOST'),
+        user=os.getenv('DB_USER'),
+        password=os.getenv('DB_PASS'),
+        database=os.getenv('DB_NAME')
+    )
 
 
-
-
+@bot.event
+async def on_ready():
+    print(f'Logged in as {bot.user}')
 
 
 def run_bot():
