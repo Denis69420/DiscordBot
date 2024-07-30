@@ -5,7 +5,6 @@ from discord import app_commands
 class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.tree = bot.tree
 
     @app_commands.command(name='kick', description='Kick a member from the server. Usage: /kick @member [reason]')
     @app_commands.checks.has_permissions(kick_members=True)
@@ -14,7 +13,7 @@ class Admin(commands.Cog):
         await interaction.response.send_message(f"{member} has been kicked.")
 
     async def cog_load(self):
-        self.tree.add_command(self.kick)
+        self.bot.tree.add_command(self.kick)
 
 async def setup(bot):
     await bot.add_cog(Admin(bot))

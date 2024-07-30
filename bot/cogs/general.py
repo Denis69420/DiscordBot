@@ -6,7 +6,6 @@ from bot.utils.database import get_db_connection
 class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.tree = bot.tree
 
     @app_commands.command(name='testdb', description='Test the database connection.')
     async def test_db(self, interaction: discord.Interaction):
@@ -18,7 +17,7 @@ class General(commands.Cog):
             await interaction.response.send_message("Failed to connect to the database.")
 
     async def cog_load(self):
-        self.tree.add_command(self.test_db)
+        self.bot.tree.add_command(self.test_db)
 
 async def setup(bot):
     await bot.add_cog(General(bot))

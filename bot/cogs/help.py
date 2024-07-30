@@ -5,7 +5,6 @@ from discord import app_commands
 class Help(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
-        self.tree = bot.tree
 
     @app_commands.command(name='help', description='Display the help message.')
     async def help_command(self, interaction: discord.Interaction):
@@ -18,7 +17,7 @@ class Help(commands.Cog):
         await interaction.response.send_message(help_text)
 
     async def cog_load(self):
-        self.tree.add_command(self.help_command)
+        self.bot.tree.add_command(self.help_command)
 
 async def setup(bot):
     await bot.add_cog(Help(bot))
