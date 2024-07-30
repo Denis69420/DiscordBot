@@ -14,8 +14,8 @@ class MyBot(commands.Bot):
         print(f'Logged in as {self.user}')  # Print statement for debugging
 
         # Load extensions (cogs)
-        await self.load_extension('bot.cogs.general')
-        await self.load_extension('bot.cogs.admin')
+        self.load_extension('bot.cogs.general')
+        self.load_extension('bot.cogs.admin')
 
 intents = discord.Intents.default()
 intents.messages = True

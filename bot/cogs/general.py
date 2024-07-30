@@ -1,5 +1,5 @@
 from discord.ext import commands
-from bot.cogs.utils.database import get_db_connection
+from bot.utils.database import get_db_connection
 
 class General(commands.Cog):
     def __init__(self, bot):
