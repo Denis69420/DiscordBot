@@ -31,11 +31,12 @@ def get_db_connection():
             database=os.getenv('DB_NAME')
         )
         if connection.is_connected():
-            logger.info("Successfully connected to the database")
+            print("Successfully connected to the database")
             return connection
     except Error as e:
-        logger.error(f"Error while connecting to the database: {e}")
-        return None
+        print(f"Error while connecting to the database: {e}")
+    return None
+
 
 @bot.event
 async def on_ready():
