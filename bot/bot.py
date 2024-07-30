@@ -2,14 +2,14 @@ import os
 import logging
 import discord
 from discord.ext import commands
-from discord import app_commands  # Add this import
+from discord import app_commands
 
 logger = logging.getLogger(__name__)
 
 class MyBot(commands.Bot):
     def __init__(self, command_prefix, intents):
         super().__init__(command_prefix=command_prefix, intents=intents)
-        self.tree = app_commands.CommandTree(self)  # Initialize CommandTree
+        # self.tree = app_commands.CommandTree(self)  # Remove this line
 
     async def setup_hook(self):
         # This is a new method recommended by discord.py for async setup
