@@ -9,13 +9,14 @@ class MyBot(commands.Bot):
     def __init__(self, command_prefix, intents):
         super().__init__(command_prefix=command_prefix, intents=intents)
 
+    async def setup_hook(self):
+        # This is a new method recommended by discord.py for async setup
+        await self.load_extension('bot.cogs.general')
+        await self.load_extension('bot.cogs.admin')
+
     async def on_ready(self):
         logger.info(f'Logged in as {self.user}')
         print(f'Logged in as {self.user}')  # Print statement for debugging
-
-        # Load extensions (cogs)
-        self.load_extension('bot.cogs.general')
-        self.load_extension('bot.cogs.admin')
 
 intents = discord.Intents.default()
 intents.messages = True
