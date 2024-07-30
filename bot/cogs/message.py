@@ -15,6 +15,17 @@ class MessageCog(commands.Cog):
 
         if message.content.startswith(prefix):
             await self.bot.process_commands(message)
+            bot_message = guild_config['bot_message']
+            if bot_message:
+                bot_channel_id = guild_config['bot_channel']
+                if bot_channel_id:
+                    bot_channel = self.bot.get_channel(bot_channel_id)
+                    if bot_channel:
+                        await bot_channel.send(bot_message)
+                    else:
+                        await message.channel.send(bot_message)
+                else:
+                    await message.channel.send(bot_message)
 
 def setup(bot):
     bot.add_cog(MessageCog(bot))

@@ -1,5 +1,5 @@
 from discord.ext import commands
-from db import set_guild_config, update_guild_message
+from db import set_guild_config, update_guild_message, update_guild_channel
 
 class ConfigCog(commands.Cog):
     def __init__(self, bot):
@@ -28,6 +28,24 @@ class ConfigCog(commands.Cog):
     async def setbotmessage(self, ctx, *, message: str):
         update_guild_message(ctx.guild.id, 'bot_message', message)
         await ctx.send('Bot message set.')
+
+    @commands.command(name='setjoinchannel')
+    @commands.has_permissions(administrator=True)
+    async def setjoinchannel(self, ctx, channel_id: int):
+        update_guild_channel(ctx.guild.id, 'join_channel', channel_id)
+        await ctx.send(f'Join channel set to: {channel_id}')
+
+    @commands.command(name='setleavechannel')
+    @commands.has_permissions(administrator=True)
+    async def setleavechannel(self, ctx, channel_id: int):
+        update_guild_channel(ctx.guild.id, 'leave_channel', channel_id)
+        await ctx.send(f'Leave channel set to: {channel_id}')
+
+    @commands.command(name='setbotchannel')
+    @commands.has_permissions(administrator=True)
+    async def setbotchannel(self, ctx, channel_id: int):
+        update_guild_channel(ctx.guild.id, 'bot_channel', channel_id)
+        await ctx.send(f'Bot channel set to: {channel_id}')
 
 def setup(bot):
     bot.add_cog(ConfigCog(bot))
