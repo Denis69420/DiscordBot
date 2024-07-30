@@ -23,13 +23,14 @@ def create_table_if_not_exists():
     cursor.execute("""
         CREATE TABLE IF NOT EXISTS guild_config (
             guild_id BIGINT PRIMARY KEY,
-            prefix VARCHAR(10) DEFAULT '!',
+            prefix VARCHAR(10) DEFAULT '/',
             join_message TEXT DEFAULT NULL,
             leave_message TEXT DEFAULT NULL,
             bot_message TEXT DEFAULT NULL,
             join_channel BIGINT DEFAULT NULL,
             leave_channel BIGINT DEFAULT NULL,
-            bot_channel BIGINT DEFAULT NULL
+            bot_channel BIGINT DEFAULT NULL,
+            music_channel BIGINT DEFAULT NULL
         );
     """)
     db.commit()
