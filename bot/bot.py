@@ -7,12 +7,15 @@ logger = logging.getLogger(__name__)
 
 class MyBot(commands.Bot):
     def __init__(self, command_prefix, intents):
-        super().__init__(command_prefix=command_prefix, intents=intents, help_command=None)
+        super().__init__(command_prefix=command_prefix, intents=intents)
+        self.tree = app_commands.CommandTree(self)
 
     async def setup_hook(self):
         # This is a new method recommended by discord.py for async setup
         await self.load_extension('bot.cogs.general')
         await self.load_extension('bot.cogs.admin')
+        await self.load_extension('bot.cogs.help')
+        await self.tree.sync()
 
     async def on_ready(self):
         logger.info(f'Logged in as {self.user}')
