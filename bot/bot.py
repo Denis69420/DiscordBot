@@ -11,6 +11,7 @@ class MyBot(commands.Bot):
         self.initial_extensions = ["bot.cogs.general", "bot.cogs.admin"]
 
     async def on_ready(self):
+        await bot.load_extension('cogs.general')
         logger.info(f'Logged in as {self.user}')
 
     def load_cog(self, cog_name):
