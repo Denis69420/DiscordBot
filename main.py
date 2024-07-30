@@ -9,9 +9,15 @@ TOKEN = os.getenv('DISCORD_TOKEN')
 
 # Set up logging
 logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
     try:
-        bot.run(TOKEN)
+        # Print the TOKEN to verify it's being loaded correctly
+        if TOKEN is None:
+            logger.error("DISCORD_TOKEN is not set. Please check your .env file.")
+        else:
+            logger.info(f"DISCORD_TOKEN is set: {TOKEN[:4]}...")  # Print first 4 characters for security
+            bot.run(TOKEN)
     except Exception as e:
-        logging.error(f"Error starting the bot: {e}")
+        logger.error(f"Error starting the bot: {e}")
