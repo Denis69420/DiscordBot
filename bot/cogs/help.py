@@ -20,4 +20,6 @@ class Help(commands.Cog):
         self.bot.tree.add_command(self.help_command)
 
 async def setup(bot):
-    await bot.add_cog(Help(bot))
+    cog = Help(bot)
+    await bot.add_cog(cog)
+    await cog.cog_load()

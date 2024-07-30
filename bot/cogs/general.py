@@ -20,4 +20,6 @@ class General(commands.Cog):
         self.bot.tree.add_command(self.test_db)
 
 async def setup(bot):
-    await bot.add_cog(General(bot))
+    cog = General(bot)
+    await bot.add_cog(cog)
+    await cog.cog_load()

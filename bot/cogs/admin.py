@@ -16,4 +16,6 @@ class Admin(commands.Cog):
         self.bot.tree.add_command(self.kick)
 
 async def setup(bot):
-    await bot.add_cog(Admin(bot))
+    cog = Admin(bot)
+    await bot.add_cog(cog)
+    await cog.cog_load()
