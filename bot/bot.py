@@ -12,14 +12,12 @@ class MyBot(commands.Bot):
     async def on_ready(self):
         logger.info(f'Logged in as {self.user}')
 
-    def load_cogs(self):
-        for filename in os.listdir("./bot/cogs"):
-            if filename.endswith(".py") and not filename.startswith("_"):
-                try:
-                    self.load_extension(f"bot.cogs.{filename[:-3]}")
-                    logger.info(f"Loaded cog: {filename[:-3]}")
-                except Exception as e:
-                    logger.error(f"Failed to load cog {filename}: {e}")
+    def load_cog(self, cog_name):
+        try:
+            self.load_extension(f"bot.cogs.{cog_name}")
+            logger.info(f"Loaded cog: {cog_name}")
+        except Exception as e:
+            logger.error(f"Failed to load cog {cog_name}: {e}")
 
 intents = discord.Intents.default()
 intents.messages = True
@@ -29,4 +27,3 @@ intents.members = True
 intents.voice_states = True
 
 bot = MyBot(command_prefix='/', intents=intents)
-bot.load_extension('cogs.general')

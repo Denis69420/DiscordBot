@@ -17,6 +17,12 @@ if __name__ == "__main__":
             logger.error("DISCORD_TOKEN is not set. Please check your .env file.")
         else:
             logger.info(f"DISCORD_TOKEN is set: {TOKEN[:4]}...")  # Print first 4 characters for security
+
+            # Load cogs individually
+            bot.load_cog('general')
+            bot.load_cog('admin')
+
+            # Start the bot
             bot.run(TOKEN)
     except Exception as e:
         logger.error(f"Error starting the bot: {e}")
