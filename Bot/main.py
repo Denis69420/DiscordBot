@@ -1,10 +1,10 @@
 import os
 import mysql.connector
 from mysql.connector import Error
-import requests
+import logging
 from dotenv import load_dotenv
 import discord
-from discord.ext import commands, tasks
+from discord.ext import commands
 
 load_dotenv()
 TOKEN = os.getenv('DISCORD_TOKEN')
@@ -15,6 +15,10 @@ intents.guilds = True
 intents.message_content = True
 intents.members = True
 intents.voice_states = True
+
+# Set up logging
+logging.basicConfig(level=logging.INFO)
+logger = logging.getLogger(__name__)
 
 bot = commands.Bot(command_prefix='/', intents=intents)
 
@@ -27,22 +31,23 @@ def get_db_connection():
             database=os.getenv('DB_NAME')
         )
         if connection.is_connected():
-            print("Successfully connected to the database")
+            logger.info("Successfully connected to the database")
             return connection
     except Error as e:
-        print(f"Error while connecting to the database: {e}")
+        logger.error(f"Error while connecting to the database: {e}")
         return None
 
 @bot.event
 async def on_ready():
-    print(f'Logged in as {bot.user}')
+    logger.info(f'Logged in as {bot.user}')
+
 
 
 def run_bot():
     try:
         bot.run(TOKEN)
     except Exception as e:
-        print(f"Error starting the bot: {e}")
+        logger.error(f"Error starting the bot: {e}")
 
 if __name__ == "__main__":
     run_bot()
