@@ -4,7 +4,7 @@ class Admin(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
 
-    @commands.command(name='kick')
+    @commands.command(name='kick', help='Kick a member from the server. Usage: /kick @member [reason]')
     @commands.has_permissions(kick_members=True)
     async def kick(self, ctx, member: commands.MemberConverter, *, reason=None):
         await member.kick(reason=reason)
