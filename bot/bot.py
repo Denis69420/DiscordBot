@@ -1,30 +1,28 @@
 import os
-import logging
 import discord
 from discord.ext import commands
-from discord import app_commands
+from dotenv import load_dotenv
 
-logger = logging.getLogger(__name__)
+# Load environment variables
+load_dotenv()
+TOKEN = os.getenv('DISCORD_TOKEN')
 
-class MyBot(commands.Bot):
-    def __init__(self, command_prefix, intents):
-        super().__init__(command_prefix=command_prefix, intents=intents)
-
-    async def setup_hook(self):
-        await self.load_extension('bot.cogs.general')
-        await self.load_extension('bot.cogs.admin')
-        await self.load_extension('bot.cogs.help')
-        await self.tree.sync()
-
-    async def on_ready(self):
-        logger.info(f'Logged in as {self.user}')
-        print(f'Logged in as {self.user}')  # Print statement for debugging
-
+# Intents for bot
 intents = discord.Intents.default()
 intents.messages = True
 intents.guilds = True
-intents.message_content = True
-intents.members = True
-intents.voice_states = True
 
-bot = MyBot(command_prefix='/', intents=intents)
+# Bot setup
+bot = commands.Bot(command_prefix='/', intents=intents)
+
+@bot.event
+async def on_ready():
+    print(f'{bot.user.name} has connected to Discord!')
+    for guild in bot.guilds:
+        print(f'Connected to {guild.name} (id: {guild.id})')
+
+# Load cogs
+bot.load_extension('cogs.config')
+
+# Run the bot
+bot.run(TOKEN)
