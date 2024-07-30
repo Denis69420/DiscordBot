@@ -1,5 +1,5 @@
-import logging
 import os
+import logging
 import discord
 from discord.ext import commands
 
@@ -15,7 +15,11 @@ class MyBot(commands.Bot):
     def load_cogs(self):
         for filename in os.listdir("./bot/cogs"):
             if filename.endswith(".py") and not filename.startswith("_"):
-                self.load_extension(f"bot.cogs.{filename[:-3]}")
+                try:
+                    self.load_extension(f"bot.cogs.{filename[:-3]}")
+                    logger.info(f"Loaded cog: {filename[:-3]}")
+                except Exception as e:
+                    logger.error(f"Failed to load cog {filename}: {e}")
 
 intents = discord.Intents.default()
 intents.messages = True

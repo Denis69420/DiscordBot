@@ -13,7 +13,6 @@ logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
     try:
-        # Print the TOKEN to verify it's being loaded correctly
         if TOKEN is None:
             logger.error("DISCORD_TOKEN is not set. Please check your .env file.")
         else:

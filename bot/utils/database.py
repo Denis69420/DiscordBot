@@ -7,6 +7,7 @@ from dotenv import load_dotenv
 logger = logging.getLogger(__name__)
 
 def get_db_connection():
+    load_dotenv()
     try:
         connection = mysql.connector.connect(
             host=os.getenv('DB_HOST'),
