@@ -4,6 +4,7 @@ from bot.utils.database import get_db_connection
 class General(commands.Cog):
     def __init__(self, bot):
         self.bot = bot
+        print("General cog initialized")  # Debug print
 
     @commands.command(name='testdb')
     async def test_db(self, ctx):
@@ -16,3 +17,4 @@ class General(commands.Cog):
 
 def setup(bot):
     bot.add_cog(General(bot))
+    print("General cog setup called")  # Debug print
